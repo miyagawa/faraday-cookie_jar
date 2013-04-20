@@ -4,7 +4,7 @@ Faraday middleware to manage client-side cookies
 
 ## Description
 
-This gem is a piece of Faraday middleware that adds client-side Cookies management, using [cookiejar gem](https://github.com/dwaite/cookiejar).
+This gem is a piece of Faraday middleware that adds client-side Cookies management, using [http-cookie gem](https://github.com/sparklemotion/http-cookie).
 
 ## Installation
 
