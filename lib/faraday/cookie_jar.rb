@@ -1,21 +1,23 @@
 require "faraday"
-require "cookiejar"
+require "http/cookie_jar"
 
 module Faraday
   class CookieJar < Faraday::Middleware
     def initialize(app, options = {})
       super(app)
-      @jar = ::CookieJar::Jar.new
+      @jar = HTTP::CookieJar.new
     end
 
     def call(env)
-      cookie = @jar.get_cookie_header(env[:url])
-      unless cookie.empty?
-        env[:request_headers]["Cookie"] = cookie
+      cookies = @jar.cookies(env[:url])
+      unless cookies.empty?
+        env[:request_headers]["Cookie"] = HTTP::Cookie.cookie_value(cookies)
       end
 
       @app.call(env).on_complete do |res|
-        @jar.set_cookies_from_headers(env[:url], res[:response_headers])
+        if set_cookie = res[:response_headers]["Set-Cookie"]
+          @jar.parse(set_cookie, env[:url])
+        end
       end
     end
   end
