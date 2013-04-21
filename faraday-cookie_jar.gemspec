@@ -19,7 +19,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_dependency "faraday", ">= 0.7.4"
-  spec.add_dependency "cookiejar"
+  spec.add_dependency "http-cookie", "~> 1.0.0"
 
   spec.add_development_dependency "bundler", "~> 1.3"
   spec.add_development_dependency "rake"
