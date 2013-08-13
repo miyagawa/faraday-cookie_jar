@@ -15,8 +15,10 @@ module Faraday
       end
 
       @app.call(env).on_complete do |res|
-        if set_cookie = res[:response_headers]["Set-Cookie"]
-          @jar.parse(set_cookie, env[:url])
+        if res[:response_headers]
+          if set_cookie = res[:response_headers]["Set-Cookie"]
+            @jar.parse(set_cookie, env[:url])
+          end
         end
       end
     end
