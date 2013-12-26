@@ -5,7 +5,7 @@ module Faraday
   class CookieJar < Faraday::Middleware
     def initialize(app, options = {})
       super(app)
-      @jar = HTTP::CookieJar.new
+      @jar = options[:jar] || HTTP::CookieJar.new
     end
 
     def call(env)
