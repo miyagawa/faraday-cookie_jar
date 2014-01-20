@@ -11,7 +11,7 @@ module Faraday
     def call(env)
       cookies = @jar.cookies(env[:url])
       unless cookies.empty?
-        env[:request_headers]["Cookie"] = HTTP::Cookie.cookie_value(cookies)
+        env[:request_headers]["Cookie"] += ';' + HTTP::Cookie.cookie_value(cookies)
       end
 
       @app.call(env).on_complete do |res|
