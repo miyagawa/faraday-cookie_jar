@@ -16,4 +16,8 @@ class FakeApp < Sinatra::Application
   get '/expires' do
     response.set_cookie "foo", :value => "bar", :expires => Time.now + 1
   end
+
+  get '/multiple_cookies' do
+    "foo=#{request.cookies['foo']};language=#{request.cookies['language']}"
+  end
 end
