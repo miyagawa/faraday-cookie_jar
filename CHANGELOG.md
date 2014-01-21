@@ -1,3 +1,8 @@
+## 0.0.5  Mon Jan 20 21:53:13 PST 2014
+
+- Lock faraday dependency to < 0.9.0 for now
+- Ability to add extra cookies in addition to the ones in Cookie Jar (nanjingboy)
+
 ## 0.0.4  Mon Aug 12 23:11:46 PDT 2013
 
 - Fix a crash when there's no valid response header #3
