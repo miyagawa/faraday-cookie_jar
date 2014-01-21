@@ -24,5 +24,16 @@ describe Faraday::CookieJar do
     sleep 2
     conn.get('/dump').body.should_not == 'foo=bar'
   end
+
+  it 'multiple cookies' do
+    conn.get('/default')
+
+    response = conn.send('get') do |request|
+      request.url '/multiple_cookies'
+      request.headers.merge!({:Cookie => 'language=english'})
+    end
+
+    response.body.should == 'foo=bar;language=english'
+  end
 end
 
