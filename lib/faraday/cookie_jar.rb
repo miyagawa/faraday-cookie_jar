@@ -3,6 +3,9 @@ require "http/cookie_jar"
 
 module Faraday
   class CookieJar < Faraday::Middleware
+
+    attr_reader :jar
+
     def initialize(app, options = {})
       super(app)
       @jar = options[:jar] || HTTP::CookieJar.new

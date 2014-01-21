@@ -11,7 +11,7 @@ describe Faraday::CookieJar do
   end
 
   it 'uses the custom cookie jar' do
-    expect(middleware.instance_variable_get(:@jar)).to equal(cookie_jar)
+    expect(middleware.jar).to equal(cookie_jar)
   end
 
 end
