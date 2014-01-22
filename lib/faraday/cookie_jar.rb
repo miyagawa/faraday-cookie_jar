@@ -5,7 +5,7 @@ module Faraday
   class CookieJar < Faraday::Middleware
     def initialize(app, options = {})
       super(app)
-      @jar = HTTP::CookieJar.new
+      @jar = options[:jar] || HTTP::CookieJar.new
     end
 
     def call(env)
@@ -32,4 +32,6 @@ end
 
 if Faraday.respond_to? :register_middleware
   Faraday.register_middleware :cookie_jar => lambda { Faraday::CookieJar }
+elsif Faraday::Middleware.respond_to? :register_middleware
+  Faraday::Middleware.register_middleware :cookie_jar => Faraday::CookieJar
 end
