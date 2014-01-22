@@ -1,3 +1,8 @@
+## 0.0.6  Tue Jan 21 16:34:35 PST 2014
+
+- Support Faraday 0.9 registry API (cameron-martin)
+- Support specifying CookieJar in configuration (cameron-martin)
+
 ## 0.0.5  Mon Jan 20 21:53:13 PST 2014
 
 - Lock faraday dependency to < 0.9.0 for now
