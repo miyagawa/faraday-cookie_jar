@@ -47,7 +47,7 @@ describe Faraday::CookieJar do
       request.headers.merge!({:Cookie => 'language=english'})
     end
 
-    response.body.should == 'foo=bar;language=english'
+    expect(response.body).to eq('foo=bar;language=english')
   end
 end
 
