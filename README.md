@@ -27,6 +27,7 @@ require 'faraday-cookie_jar'
 
 conn = Faraday.new(:url => "http://example.com") do |builder|
   builder.use :cookie_jar
+  builder.adapter Faraday.default_adapter
 end
 
 conn.get "/foo"  # gets cookie
