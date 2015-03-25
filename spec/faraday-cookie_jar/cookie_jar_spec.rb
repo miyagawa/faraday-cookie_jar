@@ -35,7 +35,7 @@ describe Faraday::CookieJar do
 
     conn_with_jar.get('/default')
 
-    expect(cookie_jar.empty?).to be_false
+    expect(cookie_jar.empty?).to be false
 
   end
 
