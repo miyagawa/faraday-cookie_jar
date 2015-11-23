@@ -13,7 +13,9 @@ module Faraday
       unless cookies.empty?
         cookie_value = HTTP::Cookie.cookie_value(cookies)
         if env[:request_headers]["Cookie"]
-          env[:request_headers]["Cookie"] = cookie_value + ';' + env[:request_headers]["Cookie"]
+          unless env[:request_headers]["Cookie"] == cookie_value
+            env[:request_headers]["Cookie"] = cookie_value + ';' + env[:request_headers]["Cookie"]
+          end
         else
           env[:request_headers]["Cookie"] = cookie_value
         end
