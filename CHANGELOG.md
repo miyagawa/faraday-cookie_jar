@@ -1,4 +1,4 @@
-## 0.0.7  Tue Sep  1 22:01:00 EDT 2020
+## 0.0.7  Tue Sep  1 20:25:00 PDT 2020
 
 - Avoid loading Faraday by assuming Faraday registry API (chesterbr)
 - To support change above, require Faraday 0.8 as a minimum (chesterbr)
