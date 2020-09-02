@@ -1,3 +1,8 @@
+## 0.0.7  Tue Sep  1 22:01:00 EDT 2020
+
+- Avoid loading Faraday by assuming Faraday registry API (chesterbr)
+- To support change above, require Faraday 0.8 as a minimum (chesterbr)
+
 ## 0.0.6  Tue Jan 21 16:34:35 PST 2014
 
 - Support Faraday 0.9 registry API (cameron-martin)
