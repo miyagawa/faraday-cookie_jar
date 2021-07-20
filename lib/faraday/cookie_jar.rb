@@ -44,6 +44,7 @@ module Faraday
           if set_cookie = res[:response_headers]["Set-Cookie"]
             @jar.parse(set_cookie, env[:url])
           end
+          FileUtils.mkdir_p(File.dirname(Faraday::CookieJar.filename)) unless Faraday::CookieJar.filename.nil?
           @jar.save(Faraday::CookieJar.filename, Faraday::CookieJar.save_options) unless Faraday::CookieJar.filename.nil?
         end
       end

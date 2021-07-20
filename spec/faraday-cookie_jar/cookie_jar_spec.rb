@@ -70,7 +70,7 @@ describe Faraday::CookieJar do
     it 'saves cookies in a file' do
       Faraday::CookieJar.filename = './spec/tmp/default-cookie.yml'
       Faraday::CookieJar.save_options = { session: true }
-      File.delete Faraday::CookieJar.filename if File.exist? Faraday::CookieJar.filename
+      FileUtils.remove_dir(File.dirname(Faraday::CookieJar.filename), true) if File.exist? Faraday::CookieJar.filename
       conn.get('/default')
       expect(File).to exist(Faraday::CookieJar.filename)
       expect(saved_cookies).to match_array([have_attributes(
@@ -82,7 +82,7 @@ describe Faraday::CookieJar do
     it 'expires cookie' do
       Faraday::CookieJar.filename = './spec/tmp/expired-cookie.yml'
       Faraday::CookieJar.save_options = { session: true }
-      File.delete Faraday::CookieJar.filename if File.exist? Faraday::CookieJar.filename
+      FileUtils.remove_dir(File.dirname(Faraday::CookieJar.filename), true) if File.exist? Faraday::CookieJar.filename
       conn.get('/expires')
       expect(conn.get('/dump').body).to eq('foo=bar')
       sleep 2
