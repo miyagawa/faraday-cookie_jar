@@ -1,0 +1,13 @@
+---
+- !ruby/object:HTTP::Cookie
+  name: foo
+  value: bar
+  domain: faraday.example.com
+  for_domain: false
+  path: "/"
+  secure: false
+  httponly: false
+  expires:
+  max_age:
+  created_at: 2021-07-21 08:20:53.459479000 +10:00
+  accessed_at: 2021-07-21 08:48:57.821596000 +10:00
