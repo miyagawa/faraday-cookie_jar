@@ -6,25 +6,30 @@ module Faraday
     def initialize(app, options = {})
       super(app)
       @jar = options[:jar] || HTTP::CookieJar.new
+      @mutex = Mutex.new
     end
 
     def call(env)
-      cookies = @jar.cookies(env[:url])
-      unless cookies.empty?
-        cookie_value = HTTP::Cookie.cookie_value(cookies)
-        if env[:request_headers]["Cookie"]
-          unless env[:request_headers]["Cookie"] == cookie_value
-            env[:request_headers]["Cookie"] = cookie_value + ';' + env[:request_headers]["Cookie"]
+      @mutex.synchronize do
+        cookies = @jar.cookies(env[:url])
+        unless cookies.empty?
+          cookie_value = HTTP::Cookie.cookie_value(cookies)
+          if env[:request_headers]["Cookie"]
+            unless env[:request_headers]["Cookie"] == cookie_value
+              env[:request_headers]["Cookie"] = cookie_value + ';' + env[:request_headers]["Cookie"]
+            end
+          else
+            env[:request_headers]["Cookie"] = cookie_value
           end
-        else
-          env[:request_headers]["Cookie"] = cookie_value
         end
       end
 
       @app.call(env).on_complete do |res|
         if res[:response_headers]
           if set_cookie = res[:response_headers]["Set-Cookie"]
-            @jar.parse(set_cookie, env[:url])
+            @mutex.synchronize do
+              @jar.parse(set_cookie, env[:url])
+            end
           end
         end
       end
