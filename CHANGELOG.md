@@ -1,3 +1,7 @@
+## 0.0.8  Wed Nov 12 12:18:49 PST 2025
+
+- Relax http-cookie gem dependency #19
+
 ## 0.0.7  Tue Sep  1 20:25:00 PDT 2020
 
 - Avoid loading Faraday by assuming Faraday registry API (chesterbr)
